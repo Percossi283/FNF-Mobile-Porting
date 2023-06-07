@@ -308,7 +308,7 @@ Add
 		if (hitbox != null)
 			removeHitbox();
 
-		hitbox = new FlxHitbox();
+		hitbox = new FlxHitbox(3, FlxG.width / 4, FlxG.height, [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000]);
 		hitbox.visible = visible;
 		add(hitbox);
 
