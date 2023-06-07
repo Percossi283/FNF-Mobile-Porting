@@ -16,6 +16,8 @@ import mobile.flixel.FlxButton;
  */
 class FlxHitbox extends FlxSpriteGroup
 {
+	public var hints(default, null):Array<FlxButton>;
+
 	/**
 	 * Create the zone.
 	 * 
@@ -28,11 +30,13 @@ class FlxHitbox extends FlxSpriteGroup
 	{
 		super();
 
+		hints = new Array<FlxButton>();
+
 		for (i in 0..ammo)
 		{
 			var hint:FlxButton = createHint(i * perHintWidth, 0, perHintWidth, perHintHeight, colors[i] == null ? 0xFFFFFF : colors[i]);
 			hint.ID = i;
-			add(hint);
+			add(hints[i] = hint);
 		}
 
 		scrollFactor.set();
