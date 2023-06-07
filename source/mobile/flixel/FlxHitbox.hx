@@ -32,8 +32,11 @@ class FlxHitbox extends FlxSpriteGroup
 
 		hints = new Array<FlxButton>();
 
+		if (colors == null || colors != null && colors.length < ammo)
+			colors = [0xFFFFFF, 0xFFFFFF, 0xFFFFFF, 0xFFFFFF];
+
 		for (i in 0..ammo)
-			add(hints[i] = createHint(i * perHintWidth, 0, perHintWidth, perHintHeight, (colors == null || colors[i] == null) ? 0xFFFFFF : colors[i]));
+			add(hints[i] = createHint(i * perHintWidth, 0, perHintWidth, perHintHeight, colors[i]);
 
 		scrollFactor.set();
 	}
