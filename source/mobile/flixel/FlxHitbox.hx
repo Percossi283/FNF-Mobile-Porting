@@ -38,6 +38,19 @@ class FlxHitbox extends FlxSpriteGroup
 		scrollFactor.set();
 	}
 
+	/**
+	 * Clean up memory.
+	 */
+	override public function destroy():Void
+	{
+		super.destroy();
+
+		for (i in 0...hints.length)
+			hints[i] = FlxDestroyUtil.destroy(hints[i]);
+
+		hints.splice(0, hints.length);
+	}
+
 	private function createHint(X:Int, Y:Int, Width:Int, Height:Int, Color:Int = 0xFFFFFF):FlxButton
 	{
 		var hint:FlxButton = new FlxButton(X, Y);
