@@ -36,7 +36,7 @@ class FlxHitbox extends FlxSpriteGroup
 			colors = [0xFFFFFF, 0xFFFFFF, 0xFFFFFF, 0xFFFFFF];
 
 		for (i in 0..ammo)
-			add(hints[i] = createHint(Std.int(i * perHintWidth), 0, perHintWidth, perHintHeight, colors[i]));
+			add(hints[i] = createHint(i * perHintWidth, 0, perHintWidth, perHintHeight, colors[i]));
 
 		scrollFactor.set();
 	}
@@ -54,7 +54,7 @@ class FlxHitbox extends FlxSpriteGroup
 		hints.splice(0, hints.length);
 	}
 
-	private function createHint(X:Int, Y:Int, Width:Int, Height:Int, Color:Int = 0xFFFFFF):FlxButton
+	private function createHint(X:Float, Y:Float, Width:Int, Height:Int, Color:Int = 0xFFFFFF):FlxButton
 	{
 		var hint:FlxButton = new FlxButton(X, Y);
 		hint.loadGraphic(createHintGraphic(Width, Height, Color));
