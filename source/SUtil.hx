@@ -4,25 +4,19 @@ package;
 import android.content.Context;
 import android.widget.Toast;
 #end
-import haxe.CallStack;
 import haxe.io.Path;
+import haxe.CallStack;
 import lime.system.System as LimeSystem;
 import lime.utils.Assets as LimeAssets;
 import lime.utils.Log as LimeLogger;
-import openfl.Lib;
 import openfl.events.UncaughtErrorEvent;
+import openfl.Lib;
 #if sys
-import sys.FileSystem;
 import sys.io.File;
+import sys.FileSystem;
 #end
 
 using StringTools;
-
-enum StorageType
-{
-	DATA;
-	EXTERNAL_DATA;
-}
 
 /**
  * ...
@@ -33,23 +27,13 @@ class SUtil
 	/**
 	 * This returns the external storage path that the game will use by the type.
 	 */
-	public static function getStorageDirectory(type:StorageType = EXTERNAL_DATA):String
+	public static function getStorageDirectory():String
 	{
-		var daPath:String = '';
-
 		#if android
-		switch (type)
-		{
-			case DATA:
-				daPath = Context.getFilesDir() + '/';
-			case EXTERNAL_DATA:
-				daPath = Context.getExternalFilesDir(null) + '/';
-		}
+		return Context.getExternalFilesDir(null);
 		#elseif ios
-		daPath = LimeSystem.applicationStorageDirectory;
+		return LimeSystem.applicationStorageDirectory;
 		#end
-
-		return daPath;
 	}
 
 	/**
@@ -198,26 +182,6 @@ class SUtil
 				if (!FileSystem.exists(total))
 					FileSystem.createDirectory(total);
 			}
-		}
-	}
-
-	public static function saveContent(fileName:String = 'file', fileExtension:String = '.json',
-			fileData:String = 'you forgot to add something in your code lol'):Void
-	{
-		try
-		{
-			if (!FileSystem.exists(SUtil.getStorageDirectory() + 'saves'))
-				FileSystem.createDirectory(SUtil.getStorageDirectory() + 'saves');
-
-			File.saveContent(SUtil.getStorageDirectory() + 'saves/' + fileName + fileExtension, fileData);
-		}
-		catch (e:Dynamic)
-		{
-			#if (android && debug)
-			Toast.makeText("Error!\nClouldn't save the file because:\n" + e, Toast.LENGTH_LONG);
-			#else
-			LimeLogger.println("Error!\nClouldn't save the file because:\n" + e);
-			#end
 		}
 	}
 
