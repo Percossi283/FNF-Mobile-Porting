@@ -30,7 +30,7 @@ class SUtil
 	public static function getStorageDirectory():String
 	{
 		#if android
-		return Context.getExternalFilesDir(null);
+		return Context.getExternalFilesDir(null) + '/';
 		#elseif ios
 		return LimeSystem.applicationStorageDirectory;
 		#end
